@@ -13,7 +13,10 @@ var app = express();
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://cardinal:nutella@cluster0-tmr9g.azure.mongodb.net/local_library?retryWrites=true&w=majorityre';
+// Set up mongoDB connection
+var dev_db_url = 'mongodb+srv://cardinal:nutella@cluster0-tmr9g.azure.mongodb.net/local_library?retryWrites=true&w=majorityre';
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
+
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
